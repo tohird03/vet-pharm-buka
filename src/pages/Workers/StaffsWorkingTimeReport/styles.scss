@@ -1,0 +1,29 @@
+.time-report__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.time-report__filter {
+  display: flex;
+  flex-direction: row;
+}
+.time-report__search {
+  width: 250px;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .time-report__head {
+    flex-direction: column;
+  }
+  .time-report__filter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px !important;
+    width: 100%;
+  }
+  .time-report__search {
+    width: 100%;
+  }
+}
