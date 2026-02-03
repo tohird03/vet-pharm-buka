@@ -1,11 +1,19 @@
 import { IOrderStatus } from '@/api/order/types';
 
+export const dateLocal = new Date();
+
+dateLocal.setHours(dateLocal.getHours() + 5);
+
 export const isShowEdit = (status: IOrderStatus, createdAt: string, isClosedDay: boolean, role?: string): boolean => {
   if (!status || !createdAt) return false;
   if (isClosedDay) return false;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const orderDate = createdAt.split('T')[0]?.split(' ')[0];
+
+  console.log(today);
+  console.log(orderDate);
+
 
   const isToday = today === orderDate;
 
@@ -16,7 +24,7 @@ export const isShowEditPayments = (createdAt: string, isClosedDay: boolean, role
   if (!createdAt) return false;
   if (isClosedDay) return false;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const orderDate = createdAt.split('T')[0]?.split(' ')[0];
 
   const isToday = today === orderDate;

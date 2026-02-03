@@ -95,6 +95,9 @@ export const Action: FC<Props> = observer(({ orders }) => {
 
   const showEdit = isShowEdit(orders.status, orders.date, authStore.isCloseDay);
 
+  console.log();
+
+
   const menuSaveOptions = (
     <Menu style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
       <Item key="excel">

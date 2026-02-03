@@ -9,6 +9,7 @@ import { returnedOrdersStore } from '@/stores/products';
 import { returnedOrderApi } from '@/api/returned-order/returned-order';
 import { IReturnedOrderPayments } from '@/api/returned-order/types';
 import { authStore } from '@/stores/auth';
+import { dateLocal } from '@/utils/isShowEdit';
 
 export const PaymentModal = observer(() => {
   const [form] = Form.useForm();
@@ -18,7 +19,7 @@ export const PaymentModal = observer(() => {
 
   const { isCloseDay } = authStore;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const checkDate = returnedOrdersStore.singleReturnedOrder?.date?.split('T')[0]?.split(' ')[0];
   const isToday = checkDate === today && !isCloseDay;
 

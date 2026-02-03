@@ -9,6 +9,7 @@ import { IReturnedOrder } from '@/api/returned-order/types';
 import { returnedOrderApi } from '@/api/returned-order/returned-order';
 import { getFullDateFormat } from '@/utils/getDateFormat';
 import { authStore } from '@/stores/auth';
+import { dateLocal } from '@/utils/isShowEdit';
 
 type Props = {
   returnedOrder: IReturnedOrder;
@@ -20,7 +21,7 @@ export const Action: FC<Props> = observer(({ returnedOrder }) => {
 
   const { isCloseDay } = authStore;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const checkDate = returnedOrder?.date?.split('T')[0]?.split(' ')[0];
   const isToday = checkDate === today && !isCloseDay;
 

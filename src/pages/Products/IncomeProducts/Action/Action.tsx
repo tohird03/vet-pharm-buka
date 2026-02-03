@@ -9,6 +9,7 @@ import { incomeProductsStore } from '@/stores/products';
 import { incomeProductsApi } from '@/api/income-products';
 import { getFullDateFormat } from '@/utils/getDateFormat';
 import { authStore } from '@/stores/auth';
+import { dateLocal } from '@/utils/isShowEdit';
 
 type Props = {
   order: IIncomeOrder;
@@ -20,7 +21,7 @@ export const Action: FC<Props> = observer(({ order }) => {
 
   const { isCloseDay } = authStore;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const checkDate = order?.date?.split('T')[0]?.split(' ')[0];
   const isToday = checkDate === today && !isCloseDay;
 

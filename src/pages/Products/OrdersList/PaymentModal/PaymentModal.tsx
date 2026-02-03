@@ -10,6 +10,7 @@ import { singleClientStore } from '@/stores/clients';
 import { useParams } from 'react-router-dom';
 import { ordersApi } from '@/api/order';
 import { authStore } from '@/stores/auth';
+import { dateLocal } from '@/utils/isShowEdit';
 
 export const PaymentModal = observer(() => {
   const [form] = Form.useForm();
@@ -20,7 +21,7 @@ export const PaymentModal = observer(() => {
   const [loadingPayment, setLoadingPayment] = useState(false);
   const {isCloseDay} = authStore;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = dateLocal.toISOString().split('T')[0];
   const checkDate = ordersStore.order?.date?.split('T')[0]?.split(' ')[0];
   const isToday = checkDate === today && !isCloseDay;
 
