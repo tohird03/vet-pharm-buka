@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { IGetStaffsParams, IStaffs, staffsApi } from '@/api/staffs';
 import { addNotification } from '@/utils';
+import { IGetClientsStatisticParams, clientsInfoApi } from '@/api/clients';
 
 class ClientsStatisticStore {
   #today = new Date();
@@ -15,8 +16,8 @@ class ClientsStatisticStore {
     makeAutoObservable(this);
   }
 
-  getStaffs = (params: IGetStaffsParams) =>
-    staffsApi.getStaffs(params)
+  getClientsStatistic = (params: IGetClientsStatisticParams) =>
+    clientsInfoApi.getClientsStatistic(params)
       .then(res => res)
       .catch(addNotification);
 

@@ -4,9 +4,11 @@ import { INetworkConfig, Instance } from '../instance';
 import { IResponse } from '../types';
 import {
   IAddEditClientInfo,
+  IClientStatistic,
   IClientsInfo,
   IGetClientDeedExcelParams,
   IGetClientsInfoParams,
+  IGetClientsStatisticParams,
   IGetSingleClientParams,
 } from './types';
 
@@ -34,6 +36,9 @@ class ClientsInfoApi extends Instance {
 
   getSingleClient = (params: IGetSingleClientParams): Promise<{ data: IClientsInfo }> =>
     this.get(Endpoints.ClientOne, { params });
+
+  getClientsStatistic = (params: IGetClientsStatisticParams): Promise<IResponse<IClientStatistic[]>> =>
+    this.get(Endpoints.ClientsStatistic, { params });
 
   getUploadClients = (params: IGetClientsInfoParams): Promise<any> =>
     this.get(Endpoints.UploadClient, {
