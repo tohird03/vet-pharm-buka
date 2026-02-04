@@ -50,3 +50,22 @@ export interface IStaffPer {
   id: string;
   name: string;
 }
+
+export interface IGetStaffsReportParams extends IPagination {
+  startDate?: Date;
+  endDate?: Date;
+  userId?: string;
+}
+
+export interface IGetStaffsReports {
+  days: string[];
+  rows: IReportRow[];
+}
+
+
+export interface IReportRow {
+  userId: string;
+  fullname: string;
+  byDay: Record<string, number>;
+  totalMs: number;
+}

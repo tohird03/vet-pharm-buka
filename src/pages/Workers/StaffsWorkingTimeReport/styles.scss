@@ -13,6 +13,15 @@
   margin-right: 10px;
 }
 
+.staffs-report__accardion {
+  width: 70%;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .time-report__head {
     flex-direction: column;
@@ -26,4 +35,9 @@
   .time-report__search {
     width: 100%;
   }
+}
+
+.staffs-report__time {
+  background-color: #BFF5C0;
+  font-weight: bold;
 }

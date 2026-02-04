@@ -33,6 +33,7 @@ export enum Endpoints {
 
   StaffsMany = '/staff/many',
   StaffOne = '/staff/one',
+  StaffsReport = '/staff-activity-session/report',
 
   StaffPaymentsMany = '/staff-payment/many',
   StaffPaymentsOne = '/staff-payment/one',

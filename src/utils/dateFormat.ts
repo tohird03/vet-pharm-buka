@@ -48,3 +48,18 @@ export const dateFormatterWithStringMonth = (date: string) => {
     `${formattedDate.getDate() }-${ month[formattedDate.getMonth()] } ${ year }-yil`
   );
 };
+
+export const formatMs = (ms: number) => {
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+  return `${hours} soat ${minutes} daqiqa`;
+};
+
+const msToTime = (ms: number) => {
+  const h = Math.floor(ms / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
+
+  return `${h} soat ${m} daqiqa`;
+};

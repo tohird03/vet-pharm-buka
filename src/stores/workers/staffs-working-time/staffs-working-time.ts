@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { IGetStaffsParams, IStaffs, staffsApi } from '@/api/staffs';
+import { IGetStaffsParams, IGetStaffsReportParams, staffsApi } from '@/api/staffs';
 import { addNotification } from '@/utils';
 
 class StaffsWorkingTime {
@@ -15,8 +15,8 @@ class StaffsWorkingTime {
     makeAutoObservable(this);
   }
 
-  getStaffs = (params: IGetStaffsParams) =>
-    staffsApi.getStaffs(params)
+  getStaffsReports = (params: IGetStaffsReportParams) =>
+    staffsApi.getStaffsReport(params)
       .then(res => res)
       .catch(addNotification);
 
