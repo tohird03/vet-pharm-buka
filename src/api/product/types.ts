@@ -48,6 +48,9 @@ export interface IProductTotalCalc {
 
 export interface IGetSingleProductParams {
   productId: string;
+  startDate?: Date;
+  endDate?: Date;
+  sellerId?: string;
 }
 
 export interface IGetSingleProducts {
@@ -62,7 +65,7 @@ export interface ISingleProductStory {
   count: number;
   type: 'selling' | 'arrival' | 'returning';
   product?: IProducts;
-  staff?: IStaff;
+  staff: IStaff;
   id: string;
   selling: IOrder;
   arrival: IIncomeOrder;

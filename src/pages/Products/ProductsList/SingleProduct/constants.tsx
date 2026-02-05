@@ -67,6 +67,20 @@ export const singleProductColumns: ColumnsType<ISingleProductStory> = [
           },
         }),
       },
+      {
+        title: 'Xodim',
+        key: 'staff',
+        dataIndex: 'staff',
+        width: 150,
+        render: (value, record) => record?.type === 'selling' ? record?.staff?.fullname : null,
+        onHeaderCell: () => ({
+          style: {
+            backgroundColor: '#BFF5C0',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+        }),
+      },
     ],
   },
   {
@@ -125,6 +139,20 @@ export const singleProductColumns: ColumnsType<ISingleProductStory> = [
           },
         }),
       },
+      {
+        title: 'Xodim',
+        key: 'staff',
+        dataIndex: 'staff',
+        width: 150,
+        render: (value, record) => record?.type === 'arrival' ? record?.staff?.fullname : null,
+        onHeaderCell: () => ({
+          style: {
+            backgroundColor: '#BEE6FF',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+        }),
+      },
     ],
   },
   {
@@ -175,6 +203,20 @@ export const singleProductColumns: ColumnsType<ISingleProductStory> = [
         dataIndex: 'productCount',
         width: 100,
         render: (value, record) => record?.type === 'returning' ? getFullDateFormat(record?.createdAt) : null,
+        onHeaderCell: () => ({
+          style: {
+            backgroundColor: '#FFBDBD',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+        }),
+      },
+      {
+        title: 'Xodim',
+        key: 'staff',
+        dataIndex: 'staff',
+        width: 150,
+        render: (value, record) => record?.type === 'returning' ? record?.staff?.fullname : null,
         onHeaderCell: () => ({
           style: {
             backgroundColor: '#FFBDBD',
