@@ -116,10 +116,10 @@ export enum Endpoints {
 
 const config: Record<string, TStage> = {
   dev: {
-    apiUrl: 'https://173-212-241-67.red-pharm.nip.io',
+    apiUrl: 'https://173-212-241-67.buka-vet-pharm.nip.io',
   },
   prod: {
-    apiUrl: 'https://173-212-241-67.red-pharm.nip.io',
+    apiUrl: 'https://173-212-241-67.buka-vet-pharm.nip.io',
   },
 };
 

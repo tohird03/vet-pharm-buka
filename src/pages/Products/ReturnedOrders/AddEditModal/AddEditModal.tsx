@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, DatePicker, Form, InputNumber, Modal, Popconfirm, Select, Spin } from 'antd';
+import { Button, DatePicker, Form, InputNumber, Modal, Popconfirm, Select, Spin, notification } from 'antd';
 import classNames from 'classnames';
 import { addNotification } from '@/utils';
 import { productsListStore, returnedOrdersStore } from '@/stores/products';
@@ -19,6 +19,8 @@ import {
 import { ColumnType } from 'antd/es/table';
 import { IAddProductsToReturnedOrder, IAddReturnedOrderProducts, IAddReturnedOrders } from '@/api/returned-order/types';
 import { returnedOrderApi } from '@/api/returned-order/returned-order';
+import { ProductUnitName } from '../../ProductsList/constants';
+import { IClientsInfo } from '@/api/clients';
 
 const cn = classNames.bind(styles);
 
@@ -38,6 +40,7 @@ export const AddEditModal = observer(() => {
   const [isUpdatingProduct, setIsUpdatingProduct] = useState<IOrderProducts | null>(null);
   const [isOpenProductSelect, setIsOpenProductSelect] = useState(false);
   const countInputRef = useRef<HTMLInputElement>(null);
+  const [selectedClient, setSelectedClient] = useState<IClientsInfo | null>(null);
 
   // GET DATAS
   const { data: clientsData, isLoading: loadingClients } = useQuery({
@@ -146,7 +149,8 @@ export const AddEditModal = observer(() => {
     setSearchProducts(value);
   };
 
-  const handleChangeClientSelect = () => {
+  const handleChangeClientSelect = (client: IClientsInfo) => {
+    setSelectedClient(client);
     setIsOpenProductSelect(true);
   };
 
@@ -157,7 +161,17 @@ export const AddEditModal = observer(() => {
   const handleChangeProduct = (productId: string) => {
     const findProduct = productsData?.data?.data?.find(product => product?.id === productId);
 
-    form.setFieldValue('price', findProduct?.price);
+    if (!selectedClient) {
+      notification.error({
+        message: 'Mijoz tanlanmagan yokida mahsulot narxi mavjud emas',
+      });
+
+      return;
+    }
+
+    console.log(selectedClient);
+
+    form.setFieldValue('price', (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!);
 
     setIsOpenProductSelect(false);
     countInputRef.current?.focus();
@@ -398,6 +412,10 @@ export const AddEditModal = observer(() => {
   useEffect(() => {
     if (returnedOrdersStore?.singleReturnedOrder) {
       setSearchClients(returnedOrdersStore?.singleReturnedOrder?.client?.phone);
+      setSelectedClient(returnedOrdersStore?.singleReturnedOrder?.client);
+
+      console.log(returnedOrdersStore?.singleReturnedOrder?.client);
+
 
       form.setFieldsValue({
         // sellingDate: dayjs(returnedOrdersStore?.singleReturnedOrder?.sellingDate),
@@ -470,7 +488,13 @@ export const AddEditModal = observer(() => {
             onSearch={handleSearchClients}
             onClear={handleClearClient}
             options={clientsOptions}
-            onChange={handleChangeClientSelect}
+            onChange={(value) => {
+              const client = clientsData?.data?.data?.find((client) => client.id === value);
+
+              if (client) {
+                handleChangeClientSelect(client);
+              }
+            }}
             onSelect={(value) => handleSelectChange(value, 'clientId')}
             allowClear
           />
@@ -525,7 +549,7 @@ export const AddEditModal = observer(() => {
                       style={{ backgroundColor: `${countColor(product?.count, product?.minAmount)}` }}
                       className={cn('income-order__add-product-count')}
                     >
-                      {product?.count} dona
+                      {product?.count} {ProductUnitName[product?.unit]}
                     </p>
                   </div>
                 </div>

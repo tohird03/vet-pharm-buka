@@ -14,6 +14,7 @@ export interface IClientsInfo {
   telegram?: {
     isActive: boolean;
   };
+  address: string;
   category: ICategory;
 }
 

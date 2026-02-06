@@ -1,7 +1,7 @@
 import React from 'react';
-import {ColumnType} from 'antd/es/table';
-import {Action} from './Action';
-import { IProducts } from '@/api/product/types';
+import { ColumnType } from 'antd/es/table';
+import { Action } from './Action';
+import { IProductUnit, IProducts } from '@/api/product/types';
 import { getFullDateFormat } from '@/utils/getDateFormat';
 import { priceFormat } from '@/utils/priceFormat';
 import { NavLink } from 'react-router-dom';
@@ -26,7 +26,7 @@ export const productsListColumn: ColumnType<IProducts>[] = [
     dataIndex: 'count',
     title: 'Qoldiq',
     align: 'center',
-    render: (value, record) => `${record?.count} dona`,
+    render: (value, record) => `${record?.count} ${ProductUnitName[record?.unit]}`,
   },
   {
     key: 'cost',
@@ -82,3 +82,30 @@ export const productsListColumn: ColumnType<IProducts>[] = [
     render: (value, record) => <Action product={record} />,
   },
 ];
+
+export const ProductUnitOptions = [
+  {
+    value: IProductUnit?.KILOGRAM,
+    label: 'kg',
+  },
+  {
+    value: IProductUnit?.LITER,
+    label: 'litr',
+  },
+  {
+    value: IProductUnit?.METER,
+    label: 'metr',
+  },
+  {
+    value: IProductUnit?.PIECE,
+    label: 'dona',
+  },
+];
+
+
+export const ProductUnitName: Record<IProductUnit, string> = {
+  [IProductUnit.PIECE]: 'dona',
+  [IProductUnit.LITER]: 'litr',
+  [IProductUnit.KILOGRAM]: 'kg',
+  [IProductUnit.METER]: 'metr',
+};

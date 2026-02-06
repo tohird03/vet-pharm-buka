@@ -66,7 +66,7 @@ export const SingleProduct = observer(() => {
         productId,
         startDate: productsListStore?.startDate!,
         endDate: productsListStore?.endDate!,
-        sellerId: productsListStore?.sellerId!,
+        staffId: productsListStore?.sellerId!,
       })
         .finally(() => {
           setLoading(false);

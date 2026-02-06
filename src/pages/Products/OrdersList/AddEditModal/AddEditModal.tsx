@@ -25,6 +25,7 @@ import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useParams } from 'react-router-dom';
 import { IClientsInfo } from '@/api/clients';
 import { getFullDateFormat } from '@/utils/getDateFormat';
+import { ProductUnitName } from '../../ProductsList/constants';
 
 const cn = classNames.bind(styles);
 
@@ -737,7 +738,7 @@ export const AddEditModal = observer(() => {
                         style={{ backgroundColor: `${countColor(product?.count, product?.minAmount)}` }}
                         className={cn('income-order__add-product-count')}
                       >
-                        {product?.count} dona
+                        {product?.count} {ProductUnitName[product?.unit]}
                       </p>
                     </div>
                   </div>

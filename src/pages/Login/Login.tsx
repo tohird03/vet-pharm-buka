@@ -47,7 +47,7 @@ export const Login = observer(() => {
     <main>
       {/* <BackgroundAnimate count={20} /> */}
       <section className={cn('login')}>
-        <div className={cn('login__logo')}>
+        {/* <div className={cn('login__logo')}>
           <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -105,8 +105,9 @@ c20 28 41 50 45 50 3 0 23 -17 42 -37z"
               />
             </g>
           </svg>
-        </div>
-        <div style={{backgroundImage: `url(${ProductImg})`}} className={cn('login__form-wrapper')}>
+        </div> */}
+        {/* <div style={{backgroundImage: `url(${ProductImg})`}} className={cn('login__form-wrapper')}> */}
+        <div className={cn('login__form-wrapper')}>
           <Form
             form={form}
             onFinish={handleSubmit}

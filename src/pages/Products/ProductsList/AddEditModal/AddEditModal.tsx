@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Form, Input, InputNumber, Modal } from 'antd';
+import { Form, Input, InputNumber, Modal, Select } from 'antd';
 import { addNotification } from '@/utils';
 import { productsListStore } from '@/stores/products';
 import { priceFormat } from '@/utils/priceFormat';
 import { productsApi } from '@/api/product/product';
 import { IAddEditProduct } from '@/api/product/types';
+import { ProductUnitOptions } from '../constants';
 
 export const AddEditModal = observer(() => {
   const [form] = Form.useForm();
@@ -44,15 +45,20 @@ export const AddEditModal = observer(() => {
   const handleSubmit = (values: IAddEditProduct) => {
     setLoading(true);
 
+    const valueProducts = {
+      ...values,
+      count: 0,
+    };
+
     if (productsListStore?.singleProduct) {
       updateProduct({
-        ...values,
+        ...valueProducts,
         id: productsListStore?.singleProduct?.id!,
       });
 
       return;
     }
-    addNewProduct(values);
+    addNewProduct(valueProducts);
   };
 
   const handleModalClose = () => {
@@ -97,33 +103,22 @@ export const AddEditModal = observer(() => {
           <Input placeholder="Mahsulot nomi" />
         </Form.Item>
         <Form.Item
-          label="Mahsulot soni"
-          rules={[{ required: true }]}
-          name="count"
+          label="Mahsulot birligi"
+          name="unit"
+          rules={[{required: true}]}
         >
-          <InputNumber
-            placeholder="Qoldiq mahsulot"
-            style={{ width: '100%' }}
-            formatter={(value) => priceFormat(value!)}
+          <Select
+            options={ProductUnitOptions}
+            placeholder="Mahsulot birligi"
           />
         </Form.Item>
         <Form.Item
           label="Ogohlantiruvchi qoldiq"
           name="minAmount"
+          rules={[{required: true}]}
         >
           <InputNumber
             placeholder="Ushbu sondan kam qolgan mahsulot haqida sizni ogohlantiramiz!"
-            style={{ width: '100%' }}
-            formatter={(value) => priceFormat(value!)}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Sotish narxi"
-          rules={[{ required: true }]}
-          name="price"
-        >
-          <InputNumber
-            placeholder="Sotish narxi"
             style={{ width: '100%' }}
             formatter={(value) => priceFormat(value!)}
           />
@@ -135,6 +130,17 @@ export const AddEditModal = observer(() => {
         >
           <InputNumber
             placeholder="Sotib olingan narxi"
+            style={{ width: '100%' }}
+            formatter={(value) => priceFormat(value!)}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Sotish narxi"
+          rules={[{ required: true }]}
+          name="price"
+        >
+          <InputNumber
+            placeholder="Sotish narxi"
             style={{ width: '100%' }}
             formatter={(value) => priceFormat(value!)}
           />

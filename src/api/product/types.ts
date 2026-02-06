@@ -1,8 +1,8 @@
-import { IStaff } from "@/stores/profile/types";
-import { IPagination } from "../types";
-import { IOrder } from "../order/types";
-import { IIncomeOrder } from "../income-products/types";
-import { IReturnedOrder } from "../returned-order/types";
+import { IStaff } from '@/stores/profile/types';
+import { IPagination } from '../types';
+import { IOrder } from '../order/types';
+import { IIncomeOrder } from '../income-products/types';
+import { IReturnedOrder } from '../returned-order/types';
 
 export interface IGetProductsParams extends IPagination {
   search?: string;
@@ -20,6 +20,7 @@ export interface IProducts {
   // Sotuvda sotiladigan narxi
   price: number;
   lastSellingDate: string;
+  unit: IProductUnit;
 }
 
 export interface IAddEditProduct {
@@ -30,35 +31,35 @@ export interface IAddEditProduct {
   count: number;
   cost: number;
   selling_price: number;
-  unit: string;
+  unit: IProductUnit;
 }
 
 export interface IProductTotalCalc {
   calcPage: {
-    totalPrice: number,
-    totalCost: number,
-    totalCount: number,
-  },
+    totalPrice: number;
+    totalCost: number;
+    totalCount: number;
+  };
   calcTotal: {
-    totalPrice: number,
-    totalCost: number,
-    totalCount: number,
-  }
+    totalPrice: number;
+    totalCost: number;
+    totalCount: number;
+  };
 }
 
 export interface IGetSingleProductParams {
   productId: string;
   startDate?: Date;
   endDate?: Date;
-  sellerId?: string;
+  staffId?: string;
 }
 
 export interface IGetSingleProducts {
   products: ISingleProductStory[];
-  actualCount: number,
-  totalSellingCount: number,
-  totalArrivalCount: number,
-  totalReturningCount: number,
+  actualCount: number;
+  totalSellingCount: number;
+  totalArrivalCount: number;
+  totalReturningCount: number;
 }
 
 export interface ISingleProductStory {
@@ -71,4 +72,12 @@ export interface ISingleProductStory {
   arrival: IIncomeOrder;
   returning: IReturnedOrder;
   createdAt: string;
+}
+
+
+export enum IProductUnit {
+  PIECE = 'PIECE',
+  LITER = 'LITER',
+  KILOGRAM = 'KILOGRAM',
+  METER = 'METER',
 }

@@ -31,6 +31,13 @@ export const clientsColumns: ColumnType<IClientsInfo>[] = [
     render: (value, record) => `+${formatPhoneNumber(record?.phone)}`,
   },
   {
+    key: 'address',
+    dataIndex: 'address',
+    title: 'Manzili',
+    align: 'center',
+    render: (value, record) => record?.address,
+  },
+  {
     key: 'debt',
     dataIndex: 'debt',
     title: 'Mijoz qarzi',

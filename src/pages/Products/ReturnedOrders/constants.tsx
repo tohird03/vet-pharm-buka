@@ -7,6 +7,7 @@ import { ClientNameLink } from '@/pages/ActionComponents/ClientNameLink';
 import { Tag } from 'antd';
 import { OrderStatus, OrderStatusColor } from '../OrdersList/constants';
 import { getFullDateFormat } from '@/utils/getDateFormat';
+import { ProductUnitName } from '../ProductsList/constants';
 
 export const returnedOrdersColumns: ColumnType<IReturnedOrder>[] = [
   {
@@ -110,7 +111,7 @@ export const returnedOrdersInfoProductsColumns: ColumnType<IReturnedOrderProduct
     title: 'Soni',
     align: 'center',
     width: '150px',
-    render: (value, record) => record?.count,
+    render: (value, record) => `${record?.count} ${ProductUnitName[record?.product?.unit]}`,
   },
   {
     key: 'cost',

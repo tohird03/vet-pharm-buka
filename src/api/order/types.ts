@@ -1,5 +1,5 @@
 import { IClientsInfo, ISeller } from '../clients';
-import { IProducts } from '../product/types';
+import { IProductUnit, IProducts } from '../product/types';
 import { IPagination, IPayment, IPaymentType } from '../types';
 
 export interface IOrder {

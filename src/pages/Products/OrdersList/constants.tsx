@@ -7,6 +7,7 @@ import { getFullDateFormat } from '@/utils/getDateFormat';
 import { priceFormat } from '@/utils/priceFormat';
 import { ClientNameLink } from '@/pages/ActionComponents/ClientNameLink';
 import { PaymentStatus } from './PaymentStatus';
+import { ProductUnitName } from '../ProductsList/constants';
 
 export const ordersColumns: ColumnType<IOrder>[] = [
   {
@@ -276,7 +277,7 @@ export const ordersInfoProductsColumns: ColumnType<IOrderProducts>[] = [
     title: 'Soni',
     align: 'center',
     width: '150px',
-    render: (value, record) => record?.count,
+    render: (value, record) => `${record?.count} ${ProductUnitName[record?.product?.unit]}`,
   },
   {
     key: 'cost',
