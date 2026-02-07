@@ -40,9 +40,6 @@ export const StaffsWorkingTimeReport = observer(() => {
   const accordionData = useMemo(() => {
     const report = staffsReportData?.data;
 
-    console.log(staffsReportData?.data);
-
-
     if (!report || !today) return [];
 
     return report.rows.map((row) => ({
@@ -86,16 +83,6 @@ export const StaffsWorkingTimeReport = observer(() => {
         pageSize: 1000,
       }),
   });
-
-  const handleChangeSeller = (value: string) => {
-    if (value) {
-      staffsWorkingTimeStore.setSellerId(value);
-
-      return;
-    }
-
-    staffsWorkingTimeStore.setSellerId(null);
-  };
 
   const handleStartDateChange: DatePickerProps['onChange'] = (date, dateString) => {
     if (!dateString) {

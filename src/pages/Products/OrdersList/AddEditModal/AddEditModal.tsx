@@ -611,7 +611,7 @@ export const AddEditModal = observer(() => {
             <Button
               type="primary"
               onClick={handleOpenPaymentModal}
-              style={{marginRight: '8px'}}
+              style={{ marginRight: '8px' }}
             >
               Mijoz to&lsquo;lovi
             </Button>
@@ -656,7 +656,9 @@ export const AddEditModal = observer(() => {
             rules={[{ required: true }]}
             name="clientId"
             style={{ flex: 1, width: '100%' }}
-            help={selectedClient?.lastSellingDate ? `Oxirgi sotuv: ${getFullDateFormat(selectedClient?.lastSellingDate)}` : ''}
+            help={
+              selectedClient
+                ? `${selectedClient?.category?.name}` : ''}
           >
             <Select
               showSearch

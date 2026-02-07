@@ -477,6 +477,9 @@ export const AddEditModal = observer(() => {
           label="Mijoz"
           rules={[{ required: true }]}
           name="clientId"
+          help={
+            selectedClient
+              ? `${selectedClient?.category?.name}` : ''}
         >
           <Select
             showSearch
