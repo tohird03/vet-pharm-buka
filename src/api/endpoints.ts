@@ -76,6 +76,9 @@ export enum Endpoints {
   CategoryMany = '/client-category/many',
   CategoryOne = '/client-category/one',
 
+  ExpensesMany = '/expense/many',
+  ExpensesOne = '/expense/one',
+
   //XATO
   RefreshToken = '/dashboard-auth/refresh',
 

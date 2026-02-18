@@ -76,7 +76,7 @@ export const Header = observer(({ collapsed, onCollapsedClick, isMobile }: Props
   useEffect(() => {
     const nowTime = new Date().getHours();
 
-    if (nowTime < 8 || nowTime >= 18) return;
+    if (nowTime < 8 || nowTime >= 19) return;
     if (!activity?.isActive || !startClientSecRef.current) return;
 
     const interval = setInterval(() => {
