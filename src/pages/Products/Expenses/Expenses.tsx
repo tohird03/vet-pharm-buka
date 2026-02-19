@@ -13,7 +13,7 @@ import { expenseColumns } from './constants';
 
 const cn = classNames.bind(styles);
 
-export const StaffsPayments = observer(() => {
+export const Expenses = observer(() => {
   const { data: clientsInfoData, isLoading: loading } = useQuery({
     queryKey: [
       'getExpense',
@@ -77,8 +77,6 @@ export const StaffsPayments = observer(() => {
             defaultValue={dayjs(expensesStore.endDate)}
             allowClear={false}
           />
-          <Tooltip placement="top" title="Excelda yuklash">
-          </Tooltip>
           <Button
             onClick={handleAddNewClient}
             type="primary"

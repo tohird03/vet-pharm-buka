@@ -4,31 +4,20 @@ import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {Form, Input, InputNumber, Modal, Select} from 'antd';
 import {addNotification} from '@/utils';
 import { priceFormat } from '@/utils/priceFormat';
-import { staffsApi } from '@/api/staffs';
-import { staffsPaymentStore } from '@/stores/workers/staffs-payments';
-import { IAddEditStaffsPayment } from '@/api/staffs-payments/types';
-import { staffsPaymentsApi } from '@/api/staffs-payments/staffs-payments';
+import { IAddEditExpense, expenseApi } from '@/api/expense';
+import { expensesStore } from '@/stores/products';
 
 export const AddEditModal = observer(() => {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
 
-  const { data: sellerData, isLoading: loadingSeller } = useQuery({
-    queryKey: ['getSellers'],
-    queryFn: () =>
-      staffsApi.getStaffs({
-        pageNumber: 1,
-        pageSize: 100,
-      }),
-  });
-
-  const {mutate: addNewStaffPayment} =
+  const {mutate: addNewExpense} =
     useMutation({
-      mutationKey: ['addNewStaffPayment'],
-      mutationFn: (params: IAddEditStaffsPayment) => staffsPaymentsApi.addStaffsPayment(params),
+      mutationKey: ['addNewExpense'],
+      mutationFn: (params: IAddEditExpense) => expenseApi.addExpense(params),
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['getStaffsPayments']});
+        queryClient.invalidateQueries({queryKey: ['getExpense']});
         addNotification('To\'lov muvaffaqiyatli qo\'shildi');
         handleModalClose();
       },
@@ -38,12 +27,12 @@ export const AddEditModal = observer(() => {
       },
     });
 
-  const {mutate: updateClient} =
+  const {mutate: updateExpense} =
     useMutation({
-      mutationKey: ['updateClient'],
-      mutationFn: (params: IAddEditStaffsPayment) => staffsPaymentsApi.updateStaffsPayment(params),
+      mutationKey: ['updateExpense'],
+      mutationFn: (params: IAddEditExpense) => expenseApi.updateExpense(params),
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['getStaffsPayments']});
+        queryClient.invalidateQueries({queryKey: ['getExpense']});
         addNotification('To\'lov muvaffaqiyatli tahrirlandi');
         handleModalClose();
       },
@@ -53,52 +42,44 @@ export const AddEditModal = observer(() => {
       },
     });
 
-  const handleSubmit = (values: IAddEditStaffsPayment) => {
+  const handleSubmit = (values: IAddEditExpense) => {
     setLoading(true);
 
-    if (staffsPaymentStore?.singleStaffPayments) {
-      updateClient({
+    if (expensesStore?.singleExpense) {
+      updateExpense({
         ...values,
-        id: staffsPaymentStore?.singleStaffPayments?.id!,
+        id: expensesStore?.singleExpense?.id!,
       });
 
       return;
     }
-    addNewStaffPayment(values);
+    addNewExpense(values);
   };
 
   const handleModalClose = () => {
-    staffsPaymentStore.setSingleStaffPayments(null);
-    staffsPaymentStore.setIsOpenAddEditStaffPaymentsModal(false);
+    expensesStore.setSingleExpense(null);
+    expensesStore.setIsOpenAddEditExpenseModal(false);
   };
 
   const handleModalOk = () => {
     form.submit();
   };
 
-  const sellerOptions = useMemo(() => (
-    sellerData?.data?.data.map((sellerData) => ({
-      value: sellerData?.id,
-      label: `${sellerData?.fullname}`,
-    }))
-  ), [sellerData]);
-
   useEffect(() => {
-    if (staffsPaymentStore.singleStaffPayments) {
+    if (expensesStore.singleExpense) {
       form.setFieldsValue({
-        ...staffsPaymentStore.singleStaffPayments,
-        userId: staffsPaymentStore.singleStaffPayments?.user?.id,
+        ...expensesStore.singleExpense,
       });
     }
-  }, [staffsPaymentStore.singleStaffPayments]);
+  }, [expensesStore.singleExpense]);
 
   return (
     <Modal
-      open={staffsPaymentStore.isOpenAddEditStaffPaymentsModal}
-      title={staffsPaymentStore.singleStaffPayments ? 'Xodim hisobotini tahrirlash' : 'Xodim hisobotini qo\'shish'}
+      open={expensesStore.isOpenAddEditExpenseModal}
+      title={expensesStore.singleExpense ? 'Harajatni tahrirlash' : 'Harajatni qo\'shish'}
       onCancel={handleModalClose}
       onOk={handleModalOk}
-      okText={staffsPaymentStore.singleStaffPayments ? 'Xodim hisobotini tahrirlash' : 'Xodim hisobotini qo\'shish'}
+      okText={expensesStore.singleExpense ? 'Harajatni tahrirlash' : 'Harajatni qo\'shish'}
       cancelText="Bekor qilish"
       centered
       confirmLoading={loading}
@@ -110,22 +91,8 @@ export const AddEditModal = observer(() => {
         autoComplete="off"
       >
         <Form.Item
-          name="userId"
-          label="Xodim"
-          rules={[{required: true}]}
-        >
-          <Select
-            options={sellerOptions}
-            style={{ width: '100%' }}
-            placeholder="Xodim"
-            loading={loadingSeller}
-            allowClear
-          />
-        </Form.Item>
-
-        <Form.Item
           label="To'lov qiymati"
-          name="sum"
+          name="price"
           initialValue={0}
           rules={[{required: true}]}
         >

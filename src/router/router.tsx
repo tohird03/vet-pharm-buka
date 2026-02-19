@@ -9,6 +9,7 @@ import {
   ClientsInfo,
   ClientsPayments,
   ClientsStatistic,
+  Expenses,
   IncomeProducts,
   Login,
   Orders,
@@ -113,6 +114,10 @@ export const Router = ({isAuth}: Props) => useRoutes([
           {
             element: <Suspense fallback={<Loading />}><SingleProduct /></Suspense>,
             path: ROUTES.singleProduct,
+          },
+          {
+            element: <Suspense fallback={<Loading />}><Expenses /></Suspense>,
+            path: ROUTES.expenses,
           },
           // SETTING ROUTES
           {

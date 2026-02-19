@@ -26,7 +26,7 @@ export const expenseColumns: ColumnType<IExpense>[] = [
     title: 'To\'lov haqida',
     align: 'center',
     width: 200,
-    render: (value, record) => <span>{priceFormat(record?.description)}</span>,
+    render: (value, record) => record?.description,
   },
   {
     key: 'action',

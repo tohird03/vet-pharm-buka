@@ -54,6 +54,11 @@ export const mainMenuList: IMenuItems[] = [
         key: ROUTES.productsReturnedOrder,
         roleKey: EPageAccess.RETURNING,
       },
+      {
+        label: <><FileSyncOutlined /> Harajatlar</>,
+        key: ROUTES.expenses,
+        roleKey: EPageAccess.SELLING,
+      },
     ],
   },
   {

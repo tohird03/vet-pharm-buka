@@ -1,1 +1,1 @@
-export {StaffsPayments} from './Expenses';
+export {Expenses} from './Expenses';
