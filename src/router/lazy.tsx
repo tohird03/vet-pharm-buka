@@ -34,9 +34,6 @@ export const SingleClient = lazy(() =>
 export const ClientsPayments = lazy(() =>
   import('@/pages/Clients').then(({ClientsPayments}) => ({default: ClientsPayments})).catch(handleCatchChunkError));
 
-export const Category = lazy(() =>
-  import('@/pages/Clients').then(({Category}) => ({default: Category})).catch(handleCatchChunkError));
-
 export const ClientsStatistic = lazy(() =>
   import('@/pages/Clients').then(({ClientStatistic}) => ({default: ClientStatistic})).catch(handleCatchChunkError));
 

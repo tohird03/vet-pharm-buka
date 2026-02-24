@@ -5,7 +5,6 @@ import {Loading} from '@/components';
 import {ROUTES} from '@/constants';
 import {Layout} from '@/modules/Layout';
 import {
-  Category,
   ClientsInfo,
   ClientsPayments,
   ClientsStatistic,
@@ -72,10 +71,6 @@ export const Router = ({isAuth}: Props) => useRoutes([
           {
             element: <Suspense fallback={<Loading />}><ClientsPayments /></Suspense>,
             path: ROUTES.clientsPayments,
-          },
-          {
-            element: <Suspense fallback={<Loading />}><Category /></Suspense>,
-            path: ROUTES.clientsCategory,
           },
           {
             element: <Suspense fallback={<Loading />}><ClientsStatistic /></Suspense>,
